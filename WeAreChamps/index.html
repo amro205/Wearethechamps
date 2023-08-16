@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We are Champions!</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+</head>
+
+<body>
+    <div id="overview">
+        <h1>Challenges</h1>
+        <iframe id="overview-iframe" src="overview.html" frameborder="0" scrolling="no"></iframe>
+
+    </div>
+    <main id="mainPage">
+        <div id="headerPage">
+            <img id="imgLogotype" src="./images/freddie.png"
+                alt="A person raising its hand, indicating that the person is a champion" />
+            <h1>We are the Champions</h1>
+        </div>
+        <div id="textWindow">
+
+            <textarea id="textArea" maxlength=200 required></textarea>
+            <div id="inputContainer">
+                <select class="inputField" id="selectYourTitle">
+                    <option value="bestregards">Best regards, </option>
+                    <option value="yoursfaithfully">Respectfully, </option>
+                    <option value="sincerely"> Sincerely, </option>
+                </select>
+                <input id="inputFieldYourNickname" class="inputField" required="text">
+            </div>
+            <span id="warningMessage"></span>
+            <span id="warningMessages"></span>
+
+            <button id="publishMessageBtn">Publish</button>
+
+        </div>
+        <h2>- Endorsements -</h2>
+        <div id="chatMessages">
+        </div>
+    </main>
+
+    <!-- JAVASCRIPT -->
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>
