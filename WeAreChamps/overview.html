@@ -7,15 +7,91 @@
         body {
             font-family: monospace;
             color: #fff;
+            line-height: 1.1rem;
         }
     </style>
 </head>
 
 <body>
     <ul>
-        <li>I had several issues</li>
-        <p>check</p>
-        <li>First one was to</li>
+        <li>Overview Project</li>
+        <p>I began by tackling the design. I used GRID within the BODY and configured it with:
+            grid-template-columns:
+            1fr 1fr; and grid-auto-flow: column; The grid-auto-flow property arranges the divs automatically,
+            structuring
+            their flow.</p>
+        <p>With the design in place, my initial task was to set up the event handler for the button's click action.
+            Subsequent to that, I ensured that the connection to the Firebase Realtime Database was operating as
+            expected.
+        </p>
+        <p>Having established the connection, I added the <span style="color: red;">push
+                function</span>, a
+            feature from Firebase that, when coupled with <span style="color: red;">onValue</span>, enables real-time
+            listening for changes within the Firebase DB. This offers an alternative approach to the typical workflow of
+            a
+            user input message being entered, triggering a button click event, cycling through a loop, and finally
+            appending
+            it into the designated element, in this case a paragraph element.</p>
+        <li>Challenges and what I learned</li>
+        <p>I had to seek help for some of the features and to debug parts of the JS code base.</p>
+        <li>When you add <span style="color: red;">push(yourDatabase, yourVariableOfInput.value)</span> to your click
+            EventListener, it will push the inputValue, in this case <span style="color: red;">"let inputValue =
+                textAreaEl.value.trim();"</span>, to the Firebase database once the click EventListener is triggered.
+        </li> At
+        this point, the actual textContent has not yet been added to the website, but only to your database. By using
+        the <span style="color: red;">onValue function from Firebase</span> with the <span style="color: red;">push
+            function</span>,
+        the onValue function will now listen for any changes inside the Firebase DB, and since you just pushed the value
+        of the
+        <span style="color: red;">inputValue</span>, it means that onValue will trigger. This "chain reaction" can be
+        used to
+        your advantage. By adding the JS function that creates and appends the inputValue from the DOM to the website to
+        the
+        click EventListener, this function will now be triggered as well after the Firebase functions Push and onValue
+        have been
+        executed.
+        <li>
+            <p>I added an IF statement with the ! LOGICAL NOT which will prevent users from adding empty text fields:
+            </p>
+            <p>if (!inputValue || !inputFieldYourNicknameValue) {
+                document.getElementById("warningMessage").style.display = "block";
+                return; // Exit the function if the inputValue or nickname input is empty
+                }</p>
+            Here we check that if the text fields are NOT TRUE (meaning false as a Boolean value) then the
+            warningMessage will show up as a block element, othewise it wont be displayed
+            document.getElementById("warningMessage").style.display = "none";
+        </li>
+        <li>
+            <p>When the page is refreshed the onValue will be automatically triggered becuase we literally reload the JS
+                file. Inside the onValue we have a couple of lines that checks:
+            <p>
+
+                <span style="color: red;">while (chatMessagesEl.firstChild) {
+                    chatMessagesEl.removeChild(chatMessagesEl.firstChild);
+                    }</span>
+            </p>
+            This while loop will remove all the paragraph elements that was added by the DOM until there is none left.
+            Now we can add them back by adding them back from the DB.</p>
+
+            <p>
+                <span style="color: red;">DBConvertedToArrayBySnapshot.forEach(function (currentElement) {
+                    constructUserMessagesFromTextArea(currentElement);
+                    });</span>
+                Here we are using the forEach on the snapshot array, and for each element inside the snapshot array (the
+                DB STORAGE) we will add a paragraph of that element by the DOM. Hence, we re-create the list back to the
+                website. This will prevent duplicated messages to appear
+            </p>
+        </li>
+        <li>How to capitalize first letter of InpuField "your nickname"</li>
+        <p>Since we are using the DOM and not innerHTML, it means we cannot add text-transform: capitalize; to the input
+            text-field. Instead we are adding a function of
+        <p><span style="color: red;">function capitalize(input) {
+                return input.charAt(0).toUpperCase() + input.slice(1);
+                }</span></p>
+        Those are the core struggles I had and check the
+        <a href="https://github.com/amro205/Wearethechamps/tree/main/WeAreChamps" target="_blank">index.js</a> for the
+        full
+        code incl. useful comments</p>
     </ul>
 </body>
 
