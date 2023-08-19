@@ -4,6 +4,11 @@
 	box-sizing: border-box;
 }
 
+html,
+body {
+	overflow: hidden;
+}
+
 body {
 	height: 100vh;
 	display: grid;
@@ -12,29 +17,38 @@ body {
 	font-family: monospace;
 	grid-template-columns: 1fr 1fr;
 	grid-auto-flow: column;
+
+
 }
+
 
 #overview {
 	background-color: black;
 	height: 100vh;
 	width: 50vw;
-	padding-top: 1rem;
-	overflow: scroll;
+	padding: 2rem 0;
+
 }
-#overview > h1 {
+
+#overview>h1 {
 	text-align: center;
 }
-#overview > ul {
-	padding: 0 1rem;
+
+#overview>ul {
+	/* padding: 0 1rem; */
 	/* list-style-type: none; */
 }
+
 #overview-iframe {
 	width: 100%;
 	height: 100%;
 	border: none;
-	overflow: hidden;
 	color: #fff;
+	overflow: auto;
+	padding: 2rem 0;
+	overflow-wrap: break-word;
 }
+
 #mainPage {
 	border: 15px solid black;
 	border-bottom: 60px solid black;
@@ -82,6 +96,7 @@ h1 {
 	display: none;
 	padding: auto;
 }
+
 #textArea {
 	height: 118px;
 	width: 100%;
@@ -124,13 +139,14 @@ textarea:focus::placeholder {
 h2 {
 	margin: 0.5rem;
 }
+
 #chatMessages {
 	height: 270px;
 	width: 317px;
 	background-color: #44405956;
 	border-radius: 1rem;
 	overflow-wrap: break-word;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .appendedMessage {
@@ -160,14 +176,16 @@ h2 {
 	border-style: none;
 	margin: 0.5rem 0 0 0;
 	padding: 0.3rem 0rem;
-	padding-left: 1rem;
+	padding-left: 0.6rem;
 	border-radius: 0.3rem;
 	background: #444059;
 	color: #fff;
 }
+
 #inputFieldYourNickname {
 	text-transform: capitalize;
 }
+
 #inputFieldYourNickname:focus::placeholder {
 	opacity: 0;
 }
